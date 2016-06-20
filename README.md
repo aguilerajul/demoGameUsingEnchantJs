@@ -1,2 +1,2 @@
 # enchantJSGameDemo
-Demo Game using Enchant.js Library
+Game Demo 1 using Enchant.js Library
