@@ -30,12 +30,14 @@ var SceneGameCredits = Class.create(Scene,{
 		this.creditsText.width = gameWidth;
 		this.creditsText.color = "#ffffff";
 		this.addChild(this.creditsText);
-				
+		
+		
 		var logoEnchantImage = new Sprite(250,250);
 		logoEnchantImage.image = this.game.assets["enchantLogo"];
 		logoEnchantImage.x = gameWidth / 2 - 150;	
 		logoEnchantImage.y = this.creditsText.y + 300;
-		this.addChild(logoEnchantImage);		
+
+		this.addChild(logoEnchantImage);
 	},
 	update: function ()
 	{
