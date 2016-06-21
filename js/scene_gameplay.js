@@ -123,7 +123,7 @@ var SceneGamePlay = Class.create(Scene,{
 				this.destroyMeteor(meteor,j);
 			}
 			else if(meteor.intersect(this.player)){			
-				this.playerEnergy_IntersectByMeteor();
+				this.playerEnergy_IntersectByMeteor(this.player);
 				this.destroyMeteor(meteor,j);
 			}
 			
@@ -134,9 +134,15 @@ var SceneGamePlay = Class.create(Scene,{
 		
 		var moveFromInitialUfoPosition = this.game.width - this.width;
 		var movToFinalUfoPosition = this.game.width + this.width;			
+		var meteorPosition = Math.floor(Math.random() * (this.height));
 
-		meteor.moveTo(this.game.width, Math.floor(Math.random() * (this.height)));// set position		
-		meteor.tl.moveBy(-movToFinalUfoPosition, 0, getRandomInt(80,150)); // set movement
+		if(meteor.height < meteorPosition)
+			meteorPosition = meteorPosition - meteor.height;
+		if(meteorPosition + meteor.height > gameHeight)
+			meteorPosition = gameHeight - meteor.height;
+
+		meteor.moveTo(this.game.width, meteorPosition);// set position		
+		meteor.tl.moveBy(-movToFinalUfoPosition, 0, getRandomInt(100,200)); // set movement
 		
 		this.meteorList.push(meteor);
 		this.addChild(meteor);
@@ -176,7 +182,30 @@ var SceneGamePlay = Class.create(Scene,{
 		this.removePlayerLife();
 	},
 	playerExplotion: function()
-	{
+	{		
+		var shipExplotion = new Sprite(98, 98);
+		shipExplotion.image = this.game.assets["imgShipExplotionp"];
+		shipExplotion.frame = 1;		
+		shipExplotion.x = this.player.x;
+		shipExplotion.y = this.player.y;
+		shipExplotion.addEventListener(Event.ENTER_FRAME,function(evt){			
+			if(shipExplotion)
+			{				
+				if(shipExplotion.frame >= 17)
+				{					
+					shipExplotion.frame = 0;					
+					this.scene.removeChild(shipExplotion);
+					shipExplotion = null;
+				}
+				else
+					shipExplotion.frame += 1;
+			}
+		});
+		this.scene.addChild(shipExplotion);
+
+		this.removeChild(this.player);
+		this.player = new Player();
+		this.addChild(this.player);
 	},
 	setInitialPosition: function()
 	{

@@ -22,6 +22,7 @@ window.onload = function(){
 		"imgMeteorBig": "img/meteorBrown_big1.png",
 		"imgMeteorSml": "img/meteorBrown_med1.png",
 		"imgMeteorExplotion": "img/explotion.png",
+		"imgShipExplotionp": "img/explotion_ship.png",
 		"imgMeteorTin": "img/meteorBrown_small1.png",
 		"imgLaserGreen": "img/laserGreen11.png",
 		"sndLaserGreen": "sounds/laser3.ogg",
